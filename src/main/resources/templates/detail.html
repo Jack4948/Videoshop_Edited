@@ -17,8 +17,11 @@
                     <div class="content">
                         <a class="header" th:text="${disc.name}">Last Action Hero</a>
                         <div class="meta">
+                        <p>
                             <span th:text="${disc.genre}">Action</span>
                             <span th:text="${{disc.price}}">9.99 €</span>
+                        </p>
+                            <p>Duration: <span th:text="${disc.duration}"></span> minutes</p>
                         </div>
                         <div class="description">
                             <p>Vorrat:</p>

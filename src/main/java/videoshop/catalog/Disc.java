@@ -41,6 +41,7 @@ public class Disc extends Product {
 	// primitive Typen oder Strings müssen nicht extra für JPA annotiert werden
 	private String genre, image;
 	private DiscType type;
+	private int duration;
 
 	// (｡◕‿◕｡)
 	// Jede Disc besitzt mehrere Kommentare, eine "1 zu n"-Beziehung -> @OneToMany für JPA
@@ -52,13 +53,19 @@ public class Disc extends Product {
 	@SuppressWarnings({ "unused", "deprecation" })
 	private Disc() {}
 
-	public Disc(String name, String image, Money price, String genre, DiscType type) {
-
+	public Disc(String name, String image, Money price, String genre, DiscType type, int duration) {
+		
 		super(name, price);
-
+		
 		this.image = image;
 		this.genre = genre;
 		this.type = type;
+		this.duration = duration;
+		
+	}
+
+	public Disc(String name, String image, Money price, String genre, DiscType type) {
+		this(name, image, price, genre, type, 0);
 	}
 
 	public String getGenre() {
@@ -85,5 +92,9 @@ public class Disc extends Product {
 
 	public DiscType getType() {
 		return type;
+	}
+
+	public int getDuration() {
+		return duration;
 	}
 }
