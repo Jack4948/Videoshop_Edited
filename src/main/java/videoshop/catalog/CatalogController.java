@@ -20,6 +20,8 @@ import jakarta.validation.constraints.NotEmpty;
 import videoshop.catalog.Disc.DiscType;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
+
 
 import org.hibernate.validator.constraints.Range;
 import org.salespointframework.inventory.InventoryItem;
@@ -33,6 +35,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.salespointframework.catalog.Product.ProductIdentifier;
+
 
 @Controller
 class CatalogController {
@@ -85,6 +89,18 @@ class CatalogController {
 
 		return "detail";
 	}
+
+	@PostMapping("/disc/{id}/watched")
+public String toggleWatched(@PathVariable("id")  ProductIdentifier id) {
+    Optional<Disc> discOptional = catalog.findById(id);
+    if (discOptional.isPresent()) {
+        Disc disc = discOptional.get();
+        disc.setWatched(!disc.isWatched());
+        catalog.save(disc);
+    }
+    return "redirect:/disc/" + id;
+}
+
 
 	@PostMapping("/disc/{disc}/comments")
 	public String comment(@PathVariable Disc disc, @Valid CommentAndRating form, Errors errors) {

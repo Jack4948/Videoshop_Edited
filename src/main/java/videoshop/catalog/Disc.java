@@ -25,6 +25,8 @@ import java.util.List;
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
 
+
+
 // (｡◕‿◕｡)
 // Da der Shop DVD sowie BluRay verkaufen soll ist es sinnvoll eine gemeinsame Basisklasse zu erstellen.
 // Diese erbt von Product um die Catalog-Klasse aus Salespoint nutzen zu können.
@@ -42,7 +44,16 @@ public class Disc extends Product {
 	private String genre, image;
 	private DiscType type;
 	private int duration;
+	private boolean watched = false;
 
+	public boolean isWatched() {
+		return watched;
+	}
+	
+	public void setWatched(boolean watched) {
+		this.watched = watched;
+	}
+	
 	// (｡◕‿◕｡)
 	// Jede Disc besitzt mehrere Kommentare, eine "1 zu n"-Beziehung -> @OneToMany für JPA
 	// cascade gibt an, was mit den Kindelementen (Comment) passieren soll wenn das Parentelement
