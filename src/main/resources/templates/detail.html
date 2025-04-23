@@ -22,10 +22,24 @@
                             <span th:text="${{disc.price}}">9.99 €</span>
                         </p>
                             <p>Duration: <span th:text="${disc.duration}"></span> minutes</p>
+                            <!-- //<p>Watched: <span th:text="${disc.watched}">false</span></p> -->
+
                         </div>
                         <div class="description">
                             <p>Vorrat:</p>
                             <p th:text="${quantity}">10</p><br/>
+                            <p>
+                                <span th:if="${disc.watched}" class="ui green label">Watched</span>
+                                <span th:if="${!disc.watched}" class="ui red label">Not Watched</span>
+                            </p>
+                            
+                            <form method="post" th:action="@{/disc/{id}/watched(id=${disc.id})}">
+                                <button class="ui button" type="submit"
+                                        th:text="${disc.watched} ? 'Mark as Unwatched' : 'Mark as Watched'">
+                                    Toggle Watch Status
+                                </button>
+                            </form>
+                            
                             <form class="ui form" method="post" th:action="@{/cart}" th:if="${orderable}">
                                 <input type="hidden" name="pid" value="0" th:value="${disc.id}"/>
                                 <div class="field">
